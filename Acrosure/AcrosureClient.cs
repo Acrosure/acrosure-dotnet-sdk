@@ -4,26 +4,27 @@ using System.Text;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Globalization;
-using System.Security;
-
+using System.Security.Cryptography;
 
 namespace Acrosure
 {
 	public class AcrosureClient 
 	{
 		public string Token { get; private set; }
-
+		public string ApiUrl { get; private set; }
 		internal Api Api;
 		public readonly ProductManager Product;
 		public readonly PolicyManager Policy;
 		public readonly ApplicationManager Application;
 		public readonly TeamManager Team;
 		public readonly DataManager Data;
-		public AcrosureClient(string token = null)
+		public AcrosureClient(string token = null,string apiUrl =null)
 		{
 			this.Token = token;
+			this.ApiUrl = apiUrl;
 			Api = new Api {
-				Token = token
+				Token = token,
+				ApiUrl = apiUrl
 			};
 			Product = new ProductManager
 			{
@@ -51,24 +52,28 @@ namespace Acrosure
 			};
 
 		}
-
-		//public static string HmacSha256Digest(this string message, string secret)
-		//{
-		//	ASCIIEncoding encoding = new ASCIIEncoding();
-		//	byte[] keyBytes = encoding.GetBytes(secret);
-		//	byte[] messageBytes = encoding.GetBytes(message);
-		//	System.Security.Cryptography.HMACSHA256 cryptographer = new System.Security.Cryptography.HMACSHA256(keyBytes);
-
-		//	byte[] bytes = cryptographer.ComputeHash(messageBytes);
-
-		//	return BitConverter.ToString(bytes).Replace("-", "").ToLower();
-		//}
-		public JObject VerifySignature(string signature , string data)
+		
+		private static string HashEncode(byte[] hash)
+		{
+			return BitConverter.ToString(hash).Replace("-", "").ToLower();
+		}
+		public bool VerifySignature(string signature , string data)
 		{
 			JObject jsonObject = JObject.Parse(data);
-			//System.Text.ASCIIEncoding
-			//var a = HMACSHA256
-			return jsonObject;
+
+			string message = jsonObject["data"].ToString();
+			
+
+			System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
+			byte[] keyByte = encoding.GetBytes(this.Token);
+
+			HMACSHA256 hmacsha256 = new HMACSHA256(keyByte);
+
+			byte[] messageBytes = encoding.GetBytes(message);
+			byte[] hashmessage = hmacsha256.ComputeHash(messageBytes);
+
+			string expected = HashEncode(hashmessage);
+			return expected == signature;
 		}
 	}
 }

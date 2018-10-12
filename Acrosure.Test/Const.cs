@@ -10,7 +10,79 @@ namespace Acrosure.Test
 	{
 		public const string TEST_PUBLIC_TOKEN = "tokn_sample_public";
 		public const string TEST_SECRET_TOKEN = "tokn_sample_secret";
-		public const string OMISE_SKEY = @"{
+		public const string TEST_API_URL = "https://api.phantompage.com/";
+		public const string TEST_PRODUCT_ID = "prod_ta";
+		public const string SUBMIT_EMPTY_APP_DATA = @"{product_id: 'prod_ta'}";
+		public const string TEST_BASIC_DATA = @"{
+			countries: ['GERMANY', 'JAPAN'],
+			policy_date: '2018-12-11',
+			expiry_date: '2018-12-18',
+			policy_unit: 'D'
+		  }";
+		public const string TEST_ADDITION_DATA = @"{
+			customer_title: 'MR.',
+			customer_first_name: 'MANA',
+			customer_last_name: 'MUNGMARN',
+			company_name: '-',
+			card_type: 'I',
+			id_card: '1489900087857',
+			email: 'developer@example.com',
+			phone: '0810000000',
+			insurer_list: [
+			  {
+				title: 'MR.',
+				first_name: 'MANA',
+				last_name: 'MUNGMARN',
+				card_type: 'I',
+				id_card: '1489900087857',
+				birthdate: '1988-10-14',
+				email: 'developer@example.com',
+				phone: '0812345678',
+				nominee: '',
+				relationship: '',
+				address: {
+				  address_no: '1',
+				  moo: '2',
+				  village: 'VILLAGE',
+				  alley: '',
+				  lane: 'LAD PRAO 4',
+				  street: 'LAD PRAO',
+				  minor_district: '',
+				  subdistrict: 'Chomphon',
+				  district: 'Chatuchak',
+				  province: 'Bangkok',
+				  postal_code: '10900'
+				}
+			  },
+			  {
+				title: 'MR.',
+				first_name: 'MANEE',
+				last_name: 'MUNGMARN',
+				card_type: 'I',
+				id_card: '1682086540364',
+				birthdate: '1988-12-31',
+				email: 'developer@example.com',
+				phone: '0812345678',
+				nominee: 'MR. MANOCH MUNGMARN',
+				relationship: 'Brother/Sister',
+				address: {
+				  address_no: '1',
+				  moo: '2',
+				  village: 'VILLAGE',
+				  alley: '',
+				  lane: 'LAD PRAO 4',
+				  street: 'LAD PRAO',
+				  minor_district: '',
+				  subdistrict: 'Chomphon',
+				  district: 'Chatuchak',
+				  province: 'Bangkok',
+				  postal_code: '10900'
+				}
+			  }
+			]
+		  }";
+		public const string TEST_PACKAGE_OPTION_DATA = @"{insurer_count: 2}";
+		public const string SUBMIT_APP_DATA = @"{
   product_id: 'prod_contractor',
   basic_data: {
     contract_value: 10000000,

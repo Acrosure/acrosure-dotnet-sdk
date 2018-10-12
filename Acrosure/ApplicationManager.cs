@@ -122,10 +122,18 @@ namespace Acrosure
 			CreateApplicationAgrs data = JObject.Parse(json).ToObject<CreateApplicationAgrs>();
 			return await this.Api.PostAsync("applications/create", data) as JObject;
 		}
+		public async Task<JObject> Create(object data)
+		{
+			return await this.Api.PostAsync("applications/create", data) as JObject;
+		}
 
 		public async Task<JObject> Update(string json)
 		{
 			UpddateApplicationAgrs data = JObject.Parse(json).ToObject<UpddateApplicationAgrs>();
+			return await this.Api.PostAsync("applications/update", data) as JObject;
+		}
+		public async Task<JObject> Update(object data)
+		{
 			return await this.Api.PostAsync("applications/update", data) as JObject;
 		}
 
@@ -147,6 +155,10 @@ namespace Acrosure
 			SelectPackageAgrs data = JObject.Parse(json).ToObject<SelectPackageAgrs>();
 			return await this.Api.PostAsync("applications/select-package", data) as JObject;
 		}
+		public async Task<JObject> SelectPackage(object data)
+		{
+			return await this.Api.PostAsync("applications/select-package", data) as JObject;
+		}
 
 		public async Task<JObject> Submit(string applicationId)
 		{
@@ -160,32 +172,6 @@ namespace Acrosure
 			return await this.Api.PostAsync("applications/confirm", data) as JObject;
 		}
 		
-		public async Task<JObject> Get2C2PHash(string json)
-		{
-			Get2C2PAgrs data = JObject.Parse(json).ToObject<Get2C2PAgrs>();
-			return await this.Api.PostAsync("payments/2c2p/get-hash", data) as JObject;
-		}
-
-		//public async Task<JObject> Get2C2PForm(string json)
-		//{
-		//	Get2C2PAgrs data = JObject.Parse(json).ToObject<Get2C2PAgrs>();
-		//	//return await this.Api.PostAsync("payments/2c2p/get-hash", data);
-		//	try
-		//	{
-		//		var resp = await Get2C2PForm(json);
-		//		if (resp["status"].ToString() == "error")
-		//			throw new System.ArgumentException("get hash error", "error");
-
-		//		//HtmlElement
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		throw new System.Exception($"response :{ex.InnerException}", ex);
-		//	}
-			
-
-		//}
-
 
 	}
 }

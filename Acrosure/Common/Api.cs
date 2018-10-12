@@ -14,9 +14,11 @@ namespace Acrosure
 {
 	class Api
 	{
-		public const string API_URL = "https://api.phantompage.com/";
+		//public const string API_URL = "https://api.phantompage.com/";
+		public const string API_URL = "https://api.acrosure.com/";
 		public string Token { get; set; }
-		
+		public string ApiUrl { get; set; }
+
 		//}
 		//private static async Task<JObject> GetAsync(string uri)
 		//{
@@ -54,14 +56,18 @@ namespace Acrosure
 		{
 			HttpClient client = new HttpClient();
 			client.DefaultRequestHeaders.Add("Authorization", String.Format("Bearer {0}", this.Token));
-
+			string Url = !String.IsNullOrEmpty(ApiUrl) ? ApiUrl : API_URL;
+			string a = JsonConvert.SerializeObject(data);
 			try
 			{
 				var content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
 
-				var response = await client.PostAsync(String.Format("{0}{1}", API_URL, path), content).ConfigureAwait(false);
+				var response = await client.PostAsync(
+					String.Format("{0}{1}", Url, path), 
+					content
+					).ConfigureAwait(false);
 				string result = await response.Content.ReadAsStringAsync();
-
+				
 				//JObject resultObject = JObject.Parse(result);
 				//return resultObject["data"];
 				return JObject.Parse(result);

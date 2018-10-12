@@ -11,20 +11,17 @@ namespace Acrosure
 	public class DataManager
 	{
 		internal Api Api;
-		private class DataAgrs
-		{
-			[JsonProperty("handler")]
-			public string handler { get; set; }
-
-			[JsonProperty("dependencies")]
-			public JArray dependencies { get; set; }
-		}
-
 		public async Task<JObject> Get(string json)
 		{
-			DataAgrs data = JObject.Parse(json).ToObject<DataAgrs>();
-			return await this.Api.PostAsync("data/get", data) as JObject;
-
+			try
+			{
+				JObject data = JObject.Parse(json);
+				return await this.Api.PostAsync("data/get", data) as JObject;
+			}
+			catch (Exception ex)
+			{
+				throw new System.Exception($"response : data is not Json string", ex);
+			}
 		}
 
 	}
