@@ -332,26 +332,3 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
-Acrosure.Examples/obj/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
-Acrosure.Examples/obj/Debug/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
-Acrosure.Examples/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
-Acrosure.Examples/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-Acrosure.Examples/obj/Debug/Acrosure.Examples.pdb
-Acrosure.Examples/obj/Debug/Acrosure.Examples.exe
-Acrosure.Examples/obj/Debug/Acrosure.Examples.csprojAssemblyReference.cache
-Acrosure.Examples/obj/Debug/Acrosure.Examples.csproj.FileListAbsolute.txt
-Acrosure.Examples/obj/Debug/Acrosure.Examples.csproj.CoreCompileInputs.cache
-Acrosure.Examples/obj/Debug/Acrosure.Examples.csproj.CopyComplete
-Acrosure.Examples/bin/Debug/Newtonsoft.Json.xml
-Acrosure.Examples/bin/Debug/Newtonsoft.Json.dll
-Acrosure.Examples/bin/Debug/Acrosure.pdb
-Acrosure.Examples/bin/Debug/Acrosure.dll
-Acrosure.Examples/bin/Debug/Acrosure.Examples.pdb
-Acrosure.Examples/bin/Debug/Acrosure.Examples.exe.config
-Acrosure.Examples/bin/Debug/Acrosure.Examples.exe
-.vs/
-Acrosure.Test/obj/
-Acrosure/obj/
-packages/
-Acrosure.Test/bin/
-Acrosure/bin/
