@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Acrosure")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription(".NET SDK for connecting with Acrosure Insurance Gateway")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Acrosure")]
 [assembly: AssemblyProduct("Acrosure")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]

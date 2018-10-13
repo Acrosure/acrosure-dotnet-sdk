@@ -18,14 +18,14 @@ namespace Acrosure.Test
 		private JArray Packages { get; set; }
 		public void CreateAnInstance(string token  = null)
 		{
-			string appToken = !String.IsNullOrEmpty(token) ? token : Const.TEST_PUBLIC_TOKEN;
-			Client = new AcrosureClient(appToken, Const.TEST_API_URL);
+			Const.SetDotEnv();
+			string appToken = !String.IsNullOrEmpty(token) ? token : Environment.GetEnvironmentVariable("TEST_PUBLIC_TOKEN");
+			Client = new AcrosureClient(appToken, Environment.GetEnvironmentVariable("TEST_API_URL"));
 		}
 		[Test,Order(1)]
 		public async Task CreateEmptyApplication()
 		{
-			CreateAnInstance(Const.TEST_SECRET_TOKEN);
-			//var result = await Client.Application.Create(Const.SUBMIT_EMPTY_APP_DATA);
+			CreateAnInstance(Environment.GetEnvironmentVariable("TEST_SECRET_TOKEN"));
 			var EmplyAppData = new { product_id = Const.TEST_PRODUCT_ID };
 			var result = await Client.Application.Create(EmplyAppData);
 			string status = result["status"].ToString();
@@ -127,14 +127,11 @@ namespace Acrosure.Test
 			JObject package_options = JObject.Parse(Const.TEST_PACKAGE_OPTION_DATA);
 			var UpdateAppData = new
 			{
-				//product_id = Const.TEST_PRODUCT_ID,
 				application_id = ApplicationId,
 				basic_data,
 				additional_data,
 				package_options
 			};
-			//JObject UpdateAppDataJ = JObject.FromObject(UpdateAppData);
-			//UpdateAppDataJ.Add("package_options", new JValue((object)null));
 			var result = await Client.Application.Update(UpdateAppData);
 			string status = result["status"].ToString();
 
@@ -163,15 +160,13 @@ namespace Acrosure.Test
 		[Test, Order(9)]
 		public async Task ConfirmApplication()
 		{
-			//CreateAnInstance(Const.TEST_SECRET_TOKEN);
+			CreateAnInstance(Environment.GetEnvironmentVariable("TEST_SECRET_TOKEN"));
 			var result = await Client.Application.Confirm(ApplicationId);
 			string status = result["status"].ToString();
 
 			Assert.That(status, Is.EqualTo("ok"));
 			Assert.IsInstanceOf<JArray>(result["data"]);
 			JArray data = result["data"] as JArray;
-			string appStatus = data["status"].ToString();
-			Assert.That(appStatus, Is.EqualTo("SUBMITTED"));
 		}
 	}
 }

@@ -16,7 +16,8 @@ namespace Acrosure.Test
 		public AcrosureClient Client { get; set; }
 		public void CreateAnInstance()
 		{
-			Client = new AcrosureClient(Const.TEST_PUBLIC_TOKEN, Const.TEST_API_URL);
+			Const.SetDotEnv();
+			Client = new AcrosureClient(Environment.GetEnvironmentVariable("TEST_PUBLIC_TOKEN"), Environment.GetEnvironmentVariable("TEST_API_URL"));
 		}
 		[Test]
 		public async Task GetDataValuesNoDependencies()

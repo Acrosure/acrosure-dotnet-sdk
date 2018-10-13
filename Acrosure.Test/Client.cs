@@ -16,13 +16,14 @@ namespace Acrosure.Test
 		public AcrosureClient Client { get; set; }
 		public void CreateAnInstance()
 		{
-			Client = new AcrosureClient(Const.TEST_PUBLIC_TOKEN, Const.TEST_API_URL);
+			Const.SetDotEnv();
+			Client = new AcrosureClient(Environment.GetEnvironmentVariable("TEST_PUBLIC_TOKEN"), Environment.GetEnvironmentVariable("TEST_API_URL"));
 		}
 		[Test]
 		public void VeriflySignature()
 		{
 			CreateAnInstance();
-			var isValid = Client.VerifySignature("7d903d2deec25fb075d38e6cd909db653299f6006a57379ee955de1f5a925795", @"{'data':'อโครชัว!'}");
+			var isValid = Client.VerifySignature(Environment.GetEnvironmentVariable("VERIFY_STRING"), @"{'data':'อโครชัว!'}");
 			
 			Assert.That(isValid, Is.EqualTo(true));
 		}

@@ -18,17 +18,7 @@ namespace Acrosure
 		public const string API_URL = "https://api.acrosure.com/";
 		public string Token { get; set; }
 		public string ApiUrl { get; set; }
-
-		//}
-		//private static async Task<JObject> GetAsync(string uri)
-		//{
-		//	HttpClient client = new HttpClient();
-
-		//	client.DefaultRequestHeaders.Add("Authorization", "Bearer tokn_sample_public");
-		//	var content = await client.GetStringAsync(uri);
-		//	//return content;
-		//	return JObject.Parse(content);
-		//}
+	
 		internal static async Task<JObject> PostAsync(string path, object data, string token)
 		{
 			HttpClient client = new HttpClient();
