@@ -355,3 +355,7 @@ Acrosure/obj/
 packages/
 Acrosure.Test/bin/
 Acrosure/bin/
+/Acrosure.Test/.env
+/Acrosure.Examples/.env
+/Acrosure/nuget.exe
+/Acrosure/Acrosure.nuspec
