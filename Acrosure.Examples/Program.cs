@@ -14,40 +14,29 @@ namespace Acrosure.Examples
 		public static AcrosureClient AcrosureClient { get; set; }
 		private static string ApplicationId { get; set; }
 		private static JArray Packages { get; set; }
-
-		static async Task GetProductList()
-		{
-			var result = await AcrosureClient.Product.List();
-		}
-		static async Task GetProduct()
-		{
-			var result = await AcrosureClient.Product.Get(Const.TEST_PRODUCT_ID);
-		}
-		static async Task GetTeamInfo()
-		{
-			var result = await AcrosureClient.Team.GetInfo();
-			var status = result["status"].ToString();
-		}
-		static async Task CreateAppication()
+		
+		static void CreateAppication()
 		{
 			JObject basic_data = JObject.Parse(Const.TEST_BASIC_DATA);
-			var EmplyAppData = new {
+			var EmplyAppData = new
+			{
 				product_id = Const.TEST_PRODUCT_ID,
-				basic_data 
+				basic_data
 			};
-			var result = await AcrosureClient.Application.Create(EmplyAppData);
+			var result = AcrosureClient.Application.Create(EmplyAppData).Result;
 			JObject data = result["data"] as JObject;
 			ApplicationId = data["id"].ToString();
 		}
 
-		static async Task GetPackageList()
+
+		static void GetPackageList()
 		{
-			var result = await AcrosureClient.Application.GetPackages(ApplicationId);
+			var result =  AcrosureClient.Application.GetPackages(ApplicationId).Result;
 			string status = result["status"].ToString();
 			JArray data = result["data"] as JArray;
 			Packages = data;
 		}
-		static async Task SelectPackage()
+		static void SelectPackage()
 		{
 			JObject firstPackage = Packages[0] as JObject;
 
@@ -57,10 +46,10 @@ namespace Acrosure.Examples
 				package_code = firstPackage["package_code"].ToString()
 			};
 
-			var result = await AcrosureClient.Application.SelectPackage(SelectPackgeData);
+			var result =  AcrosureClient.Application.SelectPackage(SelectPackgeData).Result;
 			string status = result["status"].ToString();
 		}
-		static async Task UpdateAppication()
+		static void UpdateAppication()
 		{
 			JObject basic_data = JObject.Parse(Const.TEST_BASIC_DATA);
 			JObject additional_data = JObject.Parse(Const.TEST_ADDITION_DATA);
@@ -72,28 +61,31 @@ namespace Acrosure.Examples
 				additional_data,
 				package_options
 			};
-			var result = await AcrosureClient.Application.Update(UpdateAppData);
+			var result = AcrosureClient.Application.Update(UpdateAppData).Result;
 			string status = result["status"].ToString();
 			JObject data = result["data"] as JObject;
 			string appStatus = data["status"].ToString();
 		}
-		static async Task ConfirmApplication()
+		static void ConfirmApplication()
 		{
-			var result = await AcrosureClient.Application.Confirm(ApplicationId);
+			var result = AcrosureClient.Application.Confirm(ApplicationId).Result;
 			string status = result["status"].ToString();
 		}
 		static void Main(string[] args)
 		{
 			Const.SetDotEnv();
 			AcrosureClient = new AcrosureClient(Environment.GetEnvironmentVariable("TEST_SECRET_TOKEN"), Environment.GetEnvironmentVariable("TEST_API_URL"));
-			GetTeamInfo().Wait();
-			GetProductList().Wait();
-			GetProduct().Wait();
-			//CreateAppication().Wait();
-			//GetPackageList().Wait();
-			//SelectPackage().Wait();
-			//UpdateAppication().Wait();
-			//ConfirmApplication().Wait();
+
+			JObject teamInfo = AcrosureClient.Team.GetInfo().Result;
+			JObject products = AcrosureClient.Product.List().Result;
+			JObject product = AcrosureClient.Product.Get(Const.TEST_PRODUCT_ID).Result;
+
+			CreateAppication();
+			GetPackageList();
+			SelectPackage();
+			UpdateAppication();
+			ConfirmApplication();
+			
 		}
 	}
 }

@@ -51,15 +51,13 @@ Instantiate with Json.NET from [Json.NET](https://www.newtonsoft.com/json).
 Get application with specified id.
 
 ```c#
-static async Task GetApplication()
-{
-  JObject application = await AcrosureClient.Application.Get("<application_id>");
-}
-static void Main()
-{
-  GetApplication().Wait();
-}
+JObject application = AcrosureClient.Application.Get("<application_id>").Result;
+```
 
+or
+
+```c#
+JObject application = await AcrosureClient.Application.Get("<application_id>");
 ```
 
 #### Create
@@ -67,21 +65,27 @@ static void Main()
 Create an application.
 
 ```c#
-static async Task CreateApplication()
-{
-  JObject createdApplication = await AcrosureClient.Application.Create(@"{
-    productId: '<product_id>', // required
-    basic_data: {},
-    package_options: {},
-    additional_data: {},
-    package_code: '<package_code>',
-    attachments: []
-  }");
-}
-static void Main()
-{
-  GetApplication().Wait();
-}
+JObject createdApplication = AcrosureClient.Application.Create(@"{
+  productId: '<product_id>', // required
+  basic_data: {},
+  package_options: {},
+  additional_data: {},
+  package_code: '<package_code>',
+  attachments: []
+}").Result;
+```
+
+or
+
+```c#
+JObject createdApplication = await AcrosureClient.Application.Create(@"{
+  productId: '<product_id>', // required
+  basic_data: {},
+  package_options: {},
+  additional_data: {},
+  package_code: '<package_code>',
+  attachments: []
+}");
 ```
 
 #### Update
@@ -89,21 +93,27 @@ static void Main()
 Update an application.
 
 ```c#
-static async Task UpdateApplication()
-{
-  JObject updatedApplication = await AcrosureClient.Application.Update(@"{
-    application_id: '<application_id>', // required
-    basic_data: {},
-    package_options: {},
-    additional_data: {},
-    package_code: '<package_code>',
-    attachments: []
-  }");
-}
-static void Main()
-{
-  UpdateApplication().Wait();
-}
+JObject updatedApplication = AcrosureClient.Application.Update(@"{
+  application_id: '<application_id>', // required
+  basic_data: {},
+  package_options: {},
+  additional_data: {},
+  package_code: '<package_code>',
+  attachments: []
+}").Result;
+```
+
+or
+
+```c#
+JObject updatedApplication = await AcrosureClient.Application.Update(@"{
+  application_id: '<application_id>', // required
+  basic_data: {},
+  package_options: {},
+  additional_data: {},
+  package_code: '<package_code>',
+  attachments: []
+}");
 ```
 
 #### Get packages
@@ -111,16 +121,17 @@ static void Main()
 Get current application available packages.
 
 ```c#
-static async Task GetPackages()
-{
-  JObject packages = await AcrosureClient.Application.GetPackages(
-    "<application_id>"
-  )
-}
-static void Main()
-{
-  GetPackages().Wait();
-}
+JObject packages = AcrosureClient.Application.GetPackages(
+  "<application_id>"
+).Result;
+```
+
+or
+
+```c#
+JObject packages = await AcrosureClient.Application.GetPackages(
+  "<application_id>"
+);
 ```
 
 #### Select package
@@ -128,17 +139,19 @@ static void Main()
 Select package for current application.
 
 ```c#
-static async Task SelectPackage()
-{
-  JObject updatedApplication = await AcrosureClient.Application.selectPackage({
-    application_id: "<application_id>",
-    package_code: "<package_code>"
-  });
-}
-static void Main()
-{
-  SelectPackage().Wait();
-}
+JObject updatedApplication =  AcrosureClient.Application.selectPackage({
+  application_id: "<application_id>",
+  package_code: "<package_code>"
+}).Result;
+```
+
+or
+
+```c#
+JObject updatedApplication = await AcrosureClient.Application.selectPackage({
+  application_id: "<application_id>",
+  package_code: "<package_code>"
+});
 ```
 
 #### Get package
@@ -146,16 +159,17 @@ static void Main()
 Get selected package of current application.
 
 ```c#
-static async Task GetPackage()
-{
-  JObject currentPackage = await AcrosureClient.Application.GetPackage(
-    "<application_id>"
-  );
-}
-static void Main()
-{
-  GetPackage().Wait();
-}
+JObject currentPackage = AcrosureClient.Application.GetPackage(
+  "<application_id>"
+).Result;
+```
+
+or
+
+```c#
+JObject currentPackage = await AcrosureClient.Application.GetPackage(
+  "<application_id>"
+);
 ```
 
 #### Submit
@@ -163,16 +177,17 @@ static void Main()
 Submit current application.
 
 ```c#
-static async Task Submit()
-{
-  JObject submittedApplication = await AcrosureClient.Application.Submit(
-    "<application_id>"
-  );
-}
-static void Main()
-{
-  Submit().Wait();
-}
+JObject submittedApplication = AcrosureClient.Application.Submit(
+  "<application_id>"
+).Result;
+```
+
+or
+
+```c#
+JObject submittedApplication = await AcrosureClient.Application.Submit(
+  "<application_id>"
+);
 ```
 
 #### Confirm
@@ -182,16 +197,17 @@ Confirm current application.
 _This function needs secret API key._
 
 ```c#
-static async Task Confirm()
-{
-  JObject confirmedApplication = await AcrosureClient.Application.Confirm(
-    "<application_id>"
-  );
-}
-static void Main()
-{
-  Confirm().Wait();
-}
+JObject confirmedApplication = await AcrosureClient.Application.Confirm(
+  "<application_id>"
+).Result;
+```
+
+or
+
+```c#
+JObject confirmedApplication = await AcrosureClient.Application.Confirm(
+  "<application_id>"
+);
 ```
 
 #### List
@@ -199,14 +215,13 @@ static void Main()
 List your applications .
 
 ```c#
-static async Task ListApplication()
-{
-  JObject applications = await AcrosureClient.Application.List();
-}
-static void Main()
-{
-  ListApplication().Wait();
-}
+JObject applications = AcrosureClient.Application.List().Result;
+```
+
+or
+
+```c#
+JObject applications = await AcrosureClient.Application.List();
 ```
 
 ### Product
@@ -216,14 +231,7 @@ static void Main()
 Get product with specified id.
 
 ```c#
-static async Task GetProduct()
-{
-  JObject product = await AcrosureClient.Product.Get("<product_id>");
-}
-static void Main()
-{
-  GetProduct().Wait();
-}
+JObject product = await AcrosureClient.Product.Get("<product_id>");
 ```
 
 #### List
@@ -231,14 +239,13 @@ static void Main()
 List your products.
 
 ```c#
-static async Task ListProduct()
-{
-  JObject products = await AcrosureClient.Product.List();
-}
-static void Main()
-{
-  ListProduct().Wait();
-}
+JObject products = AcrosureClient.Product.List().Result;
+```
+
+or
+
+```c#
+JObject products = await AcrosureClient.Product.List();
 ```
 
 ### Policy
@@ -248,14 +255,13 @@ static void Main()
 Get policy with specified id.
 
 ```c#
-static async Task GetPolicy()
-{
-  JObject policy = await AcrosureClient.policy.Get("<policy_id>");
-}
-static void Main()
-{
-  GetPolicy().Wait();
-}
+JObject policy = AcrosureClient.policy.Get("<policy_id>").Result;
+```
+
+or
+
+```c#
+JObject policy = await AcrosureClient.policy.Get("<policy_id>");
 ```
 
 #### List
@@ -263,14 +269,13 @@ static void Main()
 List your policies .
 
 ```c#
-static async Task ListPolicies()
-{
-  JObject policies = await AcrosureClient.policy.List();
-}
-static void Main()
-{
-  ListPolicies().Wait();
-}
+JObject policies = await AcrosureClient.policy.List().Result;
+```
+
+or
+
+```c#
+JObject policies = await AcrosureClient.policy.List();
 ```
 
 ### Data
@@ -280,23 +285,31 @@ static void Main()
 Get values for a handler (with or without dependencies, please refer to Acrosure API Document).
 
 ```c#
-static async Task GetData()
-{
-  // Without dependencies
-  JObject values = await AcrosureClient.Data.Get(@"{
-    handler: "<some_handler>"
-  }");
+// Without dependencies
+JObject values = AcrosureClient.Data.Get(@"{
+  handler: "<some_handler>"
+}").Result;
 
-  // With dependencies
-  JObject values = await AcrosureClient.Data.Get(@"{
-    handler: '<some_handler>',
-    dependencies: ['<dependency_1>', '<dependency_2>']
-  }");
-}
-static void Main()
-{
-  GetData().Wait();
-}
+// With dependencies
+JObject values = AcrosureClient.Data.Get(@"{
+  handler: '<some_handler>',
+  dependencies: ['<dependency_1>', '<dependency_2>']
+}").Result;
+```
+
+or
+
+```c#
+// Without dependencies
+JObject values = await AcrosureClient.Data.Get(@"{
+  handler: "<some_handler>"
+}");
+
+// With dependencies
+JObject values = await AcrosureClient.Data.Get(@"{
+  handler: '<some_handler>',
+  dependencies: ['<dependency_1>', '<dependency_2>']
+}");
 ```
 
 ### Team
@@ -306,14 +319,13 @@ static void Main()
 Get current team information.
 
 ```c#
-static async Task GetTeam()
-{
-var teamInfo = await AcrosureClient.Team.getInfo();
-}
-static void Main()
-{
-  GetTeam().Wait();
-}
+const teamInfo = AcrosureClient.Team.getInfo().Result;
+```
+
+or
+
+```c#
+const teamInfo = await AcrosureClient.Team.getInfo();
 ```
 
 ### Other functionality
@@ -323,17 +335,10 @@ static void Main()
 Verify webhook signature by specify signature and raw data string. (Only Node.js environment)
 
 ```c#
-static async Task VerifySignature()
-{
-  bool isSignatureValid = AcrosureClient.verifySignature(
-    "<signature>",
-    @"{'data':'<raw_data>'}"
-  );
-}
-static void Main()
-{
-  VerifySignature().Wait();
-}
+bool isSignatureValid = AcrosureClient.verifySignature(
+  "<signature>",
+  @"{'data':'<raw_data>'}"
+);
 ```
 
 ## Advanced Usage
