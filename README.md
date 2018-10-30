@@ -53,7 +53,7 @@ Get application with specified id.
 ```c#
 static async Task GetApplication()
 {
-  JObject application = await AcrosureClient.Application.Get("<application_id>")
+  JObject application = await AcrosureClient.Application.Get("<application_id>");
 }
 static void Main()
 {
@@ -76,7 +76,7 @@ static async Task CreateApplication()
     additional_data: {},
     package_code: '<package_code>',
     attachments: []
-  }")
+  }");
 }
 static void Main()
 {
@@ -98,7 +98,7 @@ static async Task UpdateApplication()
     additional_data: {},
     package_code: '<package_code>',
     attachments: []
-  }")
+  }");
 }
 static void Main()
 {
