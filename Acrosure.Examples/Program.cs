@@ -89,11 +89,11 @@ namespace Acrosure.Examples
 			GetTeamInfo().Wait();
 			GetProductList().Wait();
 			GetProduct().Wait();
-			CreateAppication().Wait();
-			GetPackageList().Wait();
-			SelectPackage().Wait();
-			UpdateAppication().Wait();
-			ConfirmApplication().Wait();
+			//CreateAppication().Wait();
+			//GetPackageList().Wait();
+			//SelectPackage().Wait();
+			//UpdateAppication().Wait();
+			//ConfirmApplication().Wait();
 		}
 	}
 }
