@@ -85,7 +85,6 @@ namespace Acrosure.Examples
 		static void Main(string[] args)
 		{
 			Const.SetDotEnv();
-			var a = Environment.GetEnvironmentVariable("TEST_SECRET_TOKEN");
 			AcrosureClient = new AcrosureClient(Environment.GetEnvironmentVariable("TEST_SECRET_TOKEN"), Environment.GetEnvironmentVariable("TEST_API_URL"));
 			GetTeamInfo().Wait();
 			GetProductList().Wait();

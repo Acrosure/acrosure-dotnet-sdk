@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using dotenv.net;
 using System.IO;
 using System.Reflection;
 
@@ -11,10 +10,61 @@ namespace Acrosure.Examples
 {
 	class Const
 	{
+		private static void ConfigRunner(bool throwOnError = true, string filePath = ".env", Encoding encoding = null)
+		{
+			// if configured to throw errors then throw otherwise return
+			if (!File.Exists(filePath))
+			{
+				if (throwOnError)
+				{
+					throw new FileNotFoundException($"An enviroment file with path \"{filePath}\" does not exist.");
+				}
+				return;
+			}
+
+			if (encoding == null)
+			{
+				encoding = Encoding.Default;
+			}
+
+			// read all lines from the env file
+			string dotEnvContents = File.ReadAllText(filePath, encoding);
+
+			// split the long string into an array of rows
+			string[] dotEnvRows = dotEnvContents.Split(new[] { "\n", "\r\n", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+			// loop through rows, split into key and value then add to enviroment
+			foreach (var row in dotEnvRows)
+			{
+				var dotEnvRow = row.Trim();
+				if (dotEnvRow.StartsWith("#"))
+					continue;
+
+				int index = dotEnvRow.IndexOf("=");
+
+				if (index >= 0)
+				{
+					string key = dotEnvRow.Substring(0, index).Trim();
+					string value = dotEnvRow.Substring(index + 1, dotEnvRow.Length - (index + 1)).Trim();
+
+					if (key.Length > 0)
+					{
+						if (value.Length == 0)
+						{
+							Environment.SetEnvironmentVariable(key, null);
+						}
+						else
+						{
+							Environment.SetEnvironmentVariable(key, value);
+						}
+					}
+				}
+			}
+		}
 		public static void SetDotEnv()
 		{
 			string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "../../.env");
-			DotEnv.Config(false, path);
+			ConfigRunner(false, path,null);
 		}
 		public const string TEST_PRODUCT_ID = "prod_ta";
 		public const string SUBMIT_EMPTY_APP_DATA = @"{product_id: 'prod_ta'}";
